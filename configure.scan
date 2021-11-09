@@ -1,0 +1,106 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.69])
+AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
+AC_CONFIG_SRCDIR([config.h.in])
+AC_CONFIG_HEADERS([config.h])
+
+# Checks for programs.
+AC_PROG_CXX
+AC_PROG_AWK
+AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
+AC_PROG_RANLIB
+
+# Checks for libraries.
+# FIXME: Replace `main' with a function in `-libverbs':
+AC_CHECK_LIB([ibverbs], [main])
+# FIXME: Replace `main' with a function in `-lswverbs':
+AC_CHECK_LIB([swverbs], [main])
+
+# Checks for header files.
+AC_FUNC_ALLOCA
+AC_HEADER_MAJOR
+AC_CHECK_HEADERS([arpa/inet.h fcntl.h inttypes.h libintl.h limits.h locale.h malloc.h netdb.h netinet/in.h stddef.h stdint.h stdlib.h string.h strings.h sys/file.h sys/param.h sys/socket.h sys/statfs.h sys/statvfs.h sys/time.h sys/vfs.h unistd.h utime.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_TYPE_UID_T
+AC_C_INLINE
+AC_TYPE_INT16_T
+AC_TYPE_INT32_T
+AC_TYPE_INT64_T
+AC_TYPE_INT8_T
+AC_TYPE_MODE_T
+AC_TYPE_OFF_T
+AC_TYPE_PID_T
+AC_TYPE_SIZE_T
+AC_TYPE_SSIZE_T
+AC_CHECK_MEMBERS([struct stat.st_blksize])
+AC_STRUCT_ST_BLOCKS
+AC_CHECK_MEMBERS([struct stat.st_rdev])
+AC_TYPE_UINT16_T
+AC_TYPE_UINT32_T
+AC_TYPE_UINT64_T
+AC_TYPE_UINT8_T
+
+# Checks for library functions.
+AC_FUNC_CHOWN
+AC_FUNC_FORK
+AC_FUNC_LSTAT_FOLLOWS_SLASHED_SYMLINK
+AC_FUNC_MALLOC
+AC_FUNC_MMAP
+AC_FUNC_REALLOC
+AC_FUNC_STRNLEN
+AC_FUNC_STRTOD
+AC_CHECK_FUNCS([atexit bzero dup2 fdatasync ftruncate gethostname gettimeofday lchown localtime_r memset mkdir munmap rmdir select socket strcasecmp strchr strdup strerror strncasecmp strrchr strspn strstr strtol strtoul strtoull uname])
+
+AC_CONFIG_FILES([Makefile
+                 auth/Makefile
+                 auth/addr/Makefile
+                 auth/addr/src/Makefile
+                 auth/login/Makefile
+                 auth/login/src/Makefile
+                 booster/Makefile
+                 booster/src/Makefile
+                 doc/Makefile
+                 doc/examples/Makefile
+                 doc/hacker-guide/Makefile
+                 extras/Makefile
+                 extras/ctltools/Makefile
+                 extras/ctltools/init.d/Makefile
+                 hadafsd/Makefile
+                 hadafsd/src/Makefile
+                 libhadafs/Makefile
+                 libhadafs/src/Makefile
+                 libhadafsclient/Makefile
+                 libhadafsclient/src/Makefile
+                 transport/Makefile
+                 transport/ib-verbs/Makefile
+                 transport/ib-verbs/src/Makefile
+                 transport/socket/Makefile
+                 transport/socket/src/Makefile
+                 transport/swnet-verbs/Makefile
+                 transport/swnet-verbs/src/Makefile
+                 xlators/Makefile
+                 xlators/cluster/Makefile
+                 xlators/cluster/unify/Makefile
+                 xlators/cluster/unify/src/Makefile
+                 xlators/performance/Makefile
+                 xlators/performance/io-threads/Makefile
+                 xlators/performance/io-threads/src/Makefile
+                 xlators/performance/mem-cache/Makefile
+                 xlators/performance/mem-cache/src/Makefile
+                 xlators/protocol/Makefile
+                 xlators/protocol/client/Makefile
+                 xlators/protocol/client/src/Makefile
+                 xlators/protocol/server/Makefile
+                 xlators/protocol/server/src/Makefile
+                 xlators/storage/Makefile
+                 xlators/storage/posix/Makefile
+                 xlators/storage/posix/src/Makefile])
+AC_CONFIG_SUBDIRS([argp-standalone])
+AC_OUTPUT

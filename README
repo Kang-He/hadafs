@@ -1,0 +1,9 @@
+HADAFS is a flexible, powerful, POSIX-compliant cluster filesystem
+that can scale to several petabytes.
+
+HADAFS works over either TCP/IP or high-performance Infiniband RDMA
+interconnect.
+
+HADAFS provides striping and on-the-fly synchronous replication
+of files. HADAFS has a fully distributed design, with no
+single point of failure.

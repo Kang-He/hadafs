@@ -1,0 +1,83 @@
+#!/bin/bash
+#
+# Bring up/down gfs
+#
+# chkconfig: 2345 60 20
+# description: hadafs init script.
+#
+### BEGIN INIT INFO
+# Default-Stop: 0 1 6
+### END INIT INFO
+
+ACTION=$1
+
+function start(){
+	echo "Mounting ssd, starting hada"
+	fstart hada
+}
+
+function stop(){
+	echo "Umounting ssd, stopping hada"
+	fstop hada
+}
+
+function status(){
+	if [ "x`mount|grep /mnt/nvme`" != "x" ];then
+		echo -e "\033[1;32;40mrunning\033[0m"
+		exit 0
+	else 
+		echo -e "\033[1;31;40mstopped\033[0m"
+		exit 1
+	fi
+	if [ "x`ps aux|grep hada|grep /etc/hadafs/server-tcp1.vol`" != "x" ];then
+		echo -e "\033[1;32;40mrunning\033[0m"
+		exit 0 
+	else 
+		echo -e "\033[1;31;40mstopped\033[0m"
+		exit 1
+	fi
+	if [ "x`ps aux|grep hada|grep /etc/hadafs/server-tcp2.vol`" != "x" ];then
+		echo -e "\033[1;32;40mrunning\033[0m"
+		exit 0
+	else 
+		echo -e "\033[1;31;40mstopped\033[0m"
+		exit 1
+	fi
+	if [ "x`ps aux|grep hada|grep /etc/hadafs/server-tcp3.vol`" != "x" ];then
+		echo -e "\033[1;32;40mrunning\033[0m"
+		exit 0 
+	else 
+		echo -e "\033[1;31;40mstopped\033[0m"
+		exit 1
+	fi
+	if [ "x`ps aux|grep hada|grep /etc/hadafs/server-tcp4.vol`" != "x" ];then
+		echo -e "\033[1;32;40mrunning\033[0m"
+		exit 0
+	else 
+		echo -e "\033[1;31;40mstopped\033[0m"
+		exit 1
+	fi
+	
+}
+
+case $ACTION in
+        start)
+                start
+                ;;
+        stop)
+                stop
+                ;;
+        restart|reload)
+                $0 stop
+                $0 start
+                ;;
+        status)
+                status
+                ;;
+        *)
+                echo
+                echo "Usage: `basename $0` {start|stop|restart|status}"
+                echo
+                exit 1
+                ;;
+esac

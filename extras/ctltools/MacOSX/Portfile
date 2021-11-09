@@ -1,0 +1,26 @@
+# $Id$
+
+PortSystem          1.0
+
+name                hadafs
+version             2.0.0rc8
+categories          fuse
+maintainers         amar@hada.com
+description         HADAFS
+long_description    HADAFS is a cluster file system, flexible to tune it for your needs.
+homepage            http://www.hada.org/
+platforms           darwin
+master_sites        http://ftp.hada.com/pub/hada/hadafs/2.0/2.0.0
+
+configure.args      --disable-bdb
+checksums           md5 33c2d02344d4fab422e80cfb637e0b48
+
+post-destroot {
+    file mkdir ${destroot}/Library/LaunchDaemons/
+    file copy ${worksrcpath}/extras/hadafs-server.plist \
+        ${destroot}/Library/LaunchDaemons/com.hada.hadafs.plist
+
+    file mkdir ${destroot}/sbin/
+    file copy ${worksrcpath}/xlators/mount/fuse/utils/mount_hadafs \
+	${destroot}/sbin/
+}
